@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://3ck43ascru2b"]
+
+[ext_resource type="Script" uid="uid://bwenrafa6yy8i" path="res://cactus.gd" id="1_okqm8"]
+[ext_resource type="Texture2D" uid="uid://bxurrxns211ud" path="res://assets/cactus.png" id="1_tmg2t"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_okqm8"]
+radius = 22.0
+height = 80.0
+
+[node name="Area2D" type="Area2D" groups=["obstacles"]]
+script = ExtResource("1_okqm8")
+
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["obstacles"]]
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("1_tmg2t")
+offset = Vector2(0, -3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["obstacles"]]
+shape = SubResource("CapsuleShape2D_okqm8")
+
+[node name="obstacleTime" type="Timer" parent="." groups=["obstacles"]]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="obstacleTime" to="." method="_on_obstacle_time_timeout"]
